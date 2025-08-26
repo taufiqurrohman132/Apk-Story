@@ -2,8 +2,6 @@
 
 StoryApp adalah aplikasi Android sederhana yang saya kembangkan sebagai bagian dari tugas akhir kelas Android Mahir Dicoding melalui program beasiswa IDCamp. Aplikasi ini memiliki fitur login, registrasi, menampilkan daftar cerita dari API, menambah cerita baru, dan melihat detail cerita.
 
-Proyek ini masih dalam proses pengembangan dan akan terus disempurnakan sesuai dengan kriteria dan saran dari reviewer.
-
 ---
 
 ## Cuplikan Layar
@@ -54,6 +52,10 @@ Menyelesaikan submission akhir dengan menerapkan fitur-fitur sesuai standar pemb
 - Melihat detail cerita
 - Logout yang menghapus data sesi
 - Validasi input dan animasi dasar
+- Arsitektur modern (MVVM)
+- Penanganan data yang efisien (Paging 3, RemoteMediator)
+- Pengalaman pengguna yang kaya (Maps, Animasi, Localization)
+- Kualitas kode yang teruji (Unit & UI Testing)
 
 ---
 
@@ -72,54 +74,44 @@ Menyelesaikan submission akhir dengan menerapkan fitur-fitur sesuai standar pemb
 - Logout akan menghapus data sesi
 
 ### Daftar Cerita
-- Menampilkan daftar cerita dari endpoint API
-- Informasi yang ditampilkan:
-  - Nama user (R.id.tv_item_name)
-  - Foto (R.id.iv_item_photo)
-
-### Detail Cerita
-- Menampilkan informasi detail:
-  - Nama (R.id.tv_detail_name)
-  - Foto (R.id.iv_detail_photo)
-  - Deskripsi (R.id.tv_detail_description)
+- Infinite Scrolling Feed: Menampilkan daftar cerita dari API secara efisien menggunakan Paging 3 Library.
+- Kapabilitas Offline-First: Menggunakan RemoteMediator untuk menyimpan data dari API ke database lokal (Room), memungkinkan aplikasi tetap dapat menampilkan data saat offline.
+- Detail Cerita: Menampilkan detail cerita dengan animasi Shared Element Transition yang mulus.
 
 ### Tambah Cerita
-- Upload gambar dari galeri
-- Tambahkan deskripsi (R.id.ed_add_description)
-- Kirim data ke server dengan tombol (R.id.button_add)
-- Setelah sukses, kembali ke halaman list dan data muncul di paling atas
+- Upload Gambar: Memungkinkan pengguna mengunggah gambar dari Galeri dan Kamera.
+- Lokasi GPS (Opsional): Menambahkan informasi lokasi pengguna saat ini (latitude & longitude) ke dalam cerita yang diunggah.
 
-### Animasi
-- Menggunakan **Shared Element Transition** saat berpindah dari list ke detail
-
----
+### Peta Cerita
+- Visualisasi Geotag: Menggunakan Google Maps API untuk menampilkan semua cerita yang memiliki data lokasi dalam bentuk marker interaktif di peta.
+- Custom Map Style: Menerapkan gaya peta kustom untuk tampilan yang lebih menarik.
+  
+### Fitur Tambahan
+- Localization: Mendukung dua bahasa (Inggris & Indonesia).
+- Home Screen Widget: Menampilkan daftar cerita terbaru langsung di home screen pengguna.
+- Penanganan State: Menampilkan indikator Loading, pesan Error, dan Empty State saat berinteraksi dengan API.
 
 ## Teknologi yang Digunakan
 
-- Kotlin
-- MVVM Architecture
-- Retrofit
-- Glide
-- ViewModel & LiveData
-- DataStore
-- ViewBinding
+| Kategori          | Teknologi yang Digunakan                  |
+|-------------------|-------------------------------------------|
+| **Bahasa** | Kotlin                                    |
+| **Arsitektur** | MVVM (Model-View-ViewModel)               |
+| **UI** | XML, ViewBinding, Custom Views            |
+| **Asynchronous** | Kotlin Coroutines & Flow                  |
+| **Networking** | Retrofit & OkHttp                         |
+| **Data Handling** | Paging 3 dengan RemoteMediator            |
+| **Database Lokal**| Room                                      |
+| **Manajemen Sesi**| Jetpack DataStore                         |
+| **Maps** | Google Maps API                           |
+| **Image Loading** | Glide                                     |
+| **Pengujian** | JUnit (Unit Test) & Espresso (UI Test)    |
 
 ---
 
-## Catatan Tambahan
+## 🧪 Pengujian (Testing)
+Aplikasi ini dilengkapi dengan pengujian otomatis untuk memastikan keandalan dan stabilitas:
+- Unit Test: Mencakup 4+ kasus uji pada ViewModel untuk memverifikasi logika pengambilan data Paging (saat berhasil, data kosong, dll).
+- UI Test: Mencakup 1 skenario krusial (seperti alur login-logout) untuk memastikan fungsionalitas antarmuka berjalan sesuai harapan.
 
-Proyek ini masih terus saya kembangkan. Beberapa hal yang direncanakan:
-
-- Menambahkan fitur upload dari kamera
-- Loading dan error handling saat memanggil API
-- Localization (multi bahasa)
-- Navigasi yang lebih baik (tidak kembali ke login setelah berhasil login)
-
----
-
-## Status Proyek
-
-🛠️ Dalam pengembangan  
-🗓️ Target selesai: Akhir Agustus 2025  
-🎓 Tujuan: Submission kelas Mahir Dicoding
 
